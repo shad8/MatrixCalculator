@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Matrix;
 
 namespace MatrixCalculator
 {
@@ -50,7 +51,7 @@ namespace MatrixCalculator
 
     private static void printMenu()
     {
-      Console.WriteLine("Press key to choose:");
+      Console.WriteLine("Choose number and press enter to choose options:");
       Console.WriteLine("[1] Matrix operations");
       Console.WriteLine("[2] Read/write operations");
       Console.WriteLine("[3] .Net component");
