@@ -36,7 +36,7 @@ namespace Matrix
       this.body = new double[row, column];
     }
 
-    public double IndexOf(int row, int column, double? newValue)
+    public double IndexOf(int row, int column, double? newValue = null)
     {
       if (newValue.HasValue)
         this.body[row, column] = newValue.Value;
@@ -55,7 +55,7 @@ namespace Matrix
       {
         for (int j = 0; j < column; j++)
         {
-          double value = matrixA.IndexOf(i, j, null) + matrixB.IndexOf(i, j, null);
+          double value = matrixA.IndexOf(i, j) + matrixB.IndexOf(i, j);
           sumMatrix.IndexOf(i, j, value);
         }
       }
@@ -73,7 +73,7 @@ namespace Matrix
       {
         for (int j = 0; j < column; j++)
         {
-          double value = matrixA.IndexOf(i, j, null) - matrixB.IndexOf(i, j, null);
+          double value = matrixA.IndexOf(i, j) - matrixB.IndexOf(i, j);
           differenceMatrix.IndexOf(i, j, value);
         }
       }
@@ -93,12 +93,23 @@ namespace Matrix
         {
           for (int k = 0; k < matrixA.column; k++)
           {
-            double value = productMatrix.IndexOf(i, j, null) + matrixA.IndexOf(i, k, null) * matrixB.IndexOf(k, j, null);
+            double value = productMatrix.IndexOf(i, j) + matrixA.IndexOf(i, k) * matrixB.IndexOf(k, j);
             productMatrix.IndexOf(i, j, value);
           }
         }
       }
       return productMatrix;
+    }
+
+    public double ElementCount()
+    {
+      double sum = 0;
+
+      foreach(double value in this.body)
+      {
+        sum += value;
+      }
+      return sum;
     }
 
     public void Print()
@@ -107,7 +118,7 @@ namespace Matrix
       {
         for (int j = 0; j < this.column; j++)
         {
-          Console.Write(string.Format("{0} ", this.IndexOf(i, j, null)));
+          Console.Write(string.Format("{0} ", this.IndexOf(i, j)));
         }
         Console.Write(Environment.NewLine + Environment.NewLine);
       }

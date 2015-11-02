@@ -60,13 +60,16 @@ namespace MatrixCalculator
       Console.Clear();
       Matrix.Matrix B = createMatrix();
       Matrix.Matrix C = A * B;
-      Console.WriteLine("Result:\n");
+      Console.WriteLine(" Result:\n");
       C.Print();
     }
 
     private static void SumOfElements()
     {
-      throw new NotImplementedException();
+      Matrix.Matrix A = createMatrix();
+      Console.Clear();
+      A.Print();
+      Console.WriteLine(" " + "Sum of matrix element: " + A.ElementCount());
     }
 
     private static void SubtractionMatrix()
