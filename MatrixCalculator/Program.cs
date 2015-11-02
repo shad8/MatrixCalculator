@@ -11,12 +11,17 @@ namespace MatrixCalculator
   {
     static void Main(string[] args)
     {
-      string selection;
-
       Console.WriteLine("Welcome to aplication......\n");
-      printMenu();
+      menu();
+    }
 
-      do
+    private static void matrixOperations()
+    {
+      Console.WriteLine("Matrix operations: \n");
+      printSubMenu();
+
+      string selection;
+      while(true)
       {
         selection = Console.ReadLine();
 
@@ -24,7 +29,44 @@ namespace MatrixCalculator
         {
           case "1":
             Console.Clear();
-            Console.WriteLine("[1] Matrix operations\n");
+            Console.WriteLine("SubMenu");
+            break;
+          case "2":
+            Console.Clear();
+            Console.WriteLine("SubMenu");
+            break;
+          case "3":
+            Console.Clear();
+            Console.WriteLine("SubMenu");
+            break;
+          case "4":
+            Console.Clear();
+            Console.WriteLine("SubMenu");
+            break;
+          case "5":
+            Environment.Exit(0);
+            break;
+          default:
+            Console.Clear();
+            menu();
+            break;
+        }
+      }
+    }
+
+    private static void menu()
+    {
+      string selection;
+      printMenu();
+      while(true)
+      {
+        selection = Console.ReadLine();
+
+        switch (selection)
+        {
+          case "1":
+            Console.Clear();
+            matrixOperations();
             break;
           case "2":
             Console.Clear();
@@ -46,7 +88,17 @@ namespace MatrixCalculator
             printMenu();
             break;
         }
-      } while (selection != "5");
+      }
+    }
+
+    private static void printSubMenu()
+    {
+      Console.WriteLine("[1] Addition");
+      Console.WriteLine("[2] Subtraction");
+      Console.WriteLine("[3] Multiplication Matrix");
+      Console.WriteLine("[4] Sum of matrix elements");
+      Console.WriteLine("[5] EXIT");
+      Console.WriteLine("[ENTER] Back");
     }
 
     private static void printMenu()
