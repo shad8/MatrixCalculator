@@ -29,19 +29,19 @@ namespace MatrixCalculator
         {
           case "1":
             Console.Clear();
-            Console.WriteLine("SubMenu");
+            AdditionMatrix();
             break;
           case "2":
             Console.Clear();
-            Console.WriteLine("SubMenu");
+            SubtractionMatrix();
             break;
           case "3":
             Console.Clear();
-            Console.WriteLine("SubMenu");
+            MultiplicationMatrix();
             break;
           case "4":
             Console.Clear();
-            Console.WriteLine("SubMenu");
+            SumOfElements();
             break;
           case "5":
             Environment.Exit(0);
@@ -52,6 +52,54 @@ namespace MatrixCalculator
             break;
         }
       }
+    }
+
+    private static void MultiplicationMatrix()
+    {
+      Matrix.Matrix A = createMatrix();
+      Console.Clear();
+      Matrix.Matrix B = createMatrix();
+      Matrix.Matrix C = A * B;
+      Console.WriteLine("Result:\n");
+      C.Print();
+    }
+
+    private static void SumOfElements()
+    {
+      throw new NotImplementedException();
+    }
+
+    private static void SubtractionMatrix()
+    {
+      Matrix.Matrix A = createMatrix();
+      Console.Clear();
+      Matrix.Matrix B = createMatrix();
+      Matrix.Matrix C = A - B;
+      Console.WriteLine("Result:\n");
+      C.Print();
+    }
+
+    private static void AdditionMatrix()
+    {
+      Matrix.Matrix A = createMatrix();
+      Console.Clear();
+      Matrix.Matrix B = createMatrix();
+      Matrix.Matrix C = A + B;
+      Console.WriteLine("Result:\n");
+      C.Print();
+    }
+
+    private static Matrix.Matrix createMatrix()
+    {
+      Console.WriteLine("Define A matrix by row (eg 1 2 3.5 4):");
+      double[] matrixBody = Console.ReadLine().ConvertStringToDoubleArray();
+      Console.WriteLine("Number of colum:");
+      int column;
+      int row;
+      Int32.TryParse(Console.ReadLine(), out column);
+      Console.WriteLine("Number of row:");
+      Int32.TryParse(Console.ReadLine(), out row);
+      return new Matrix.Matrix(matrixBody, row, column);
     }
 
     private static void menu()
@@ -91,16 +139,6 @@ namespace MatrixCalculator
       }
     }
 
-    private static void printSubMenu()
-    {
-      Console.WriteLine("[1] Addition");
-      Console.WriteLine("[2] Subtraction");
-      Console.WriteLine("[3] Multiplication Matrix");
-      Console.WriteLine("[4] Sum of matrix elements");
-      Console.WriteLine("[5] EXIT");
-      Console.WriteLine("[ENTER] Back");
-    }
-
     private static void printMenu()
     {
       Console.WriteLine("Choose number and press enter to choose options:");
@@ -109,6 +147,16 @@ namespace MatrixCalculator
       Console.WriteLine("[3] .Net component");
       Console.WriteLine("[4] Autor");
       Console.WriteLine("[5] Exit");
+    }
+
+    private static void printSubMenu()
+    {
+      Console.WriteLine("[1] Addition");
+      Console.WriteLine("[2] Subtraction");
+      Console.WriteLine("[3] Multiplication Matrix");
+      Console.WriteLine("[4] Sum of matrix elements");
+      Console.WriteLine("[5] EXIT");
+      Console.WriteLine("[ENTER] Back");
     }
   }
 }
