@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -122,6 +123,63 @@ namespace Matrix
         }
         Console.Write(Environment.NewLine + Environment.NewLine);
       }
+    }
+
+    public static void ClassInformation()
+    {
+      Assembly assem = typeof(Matrix).Assembly;
+      AssemblyName assemName = assem.GetName();
+      Console.WriteLine("\nName: {0}", assemName.Name);
+      Console.WriteLine("Version: {0}.{1}",
+          assemName.Version.Major, assemName.Version.Minor);
+      Console.WriteLine(assem.EntryPoint);
+
+      Assembly assembly = Assembly.GetExecutingAssembly(); 
+      AssemblyDescriptionAttribute description = assembly
+        .GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false)
+        .OfType<AssemblyDescriptionAttribute>()
+        .FirstOrDefault();
+
+      AssemblyCompanyAttribute author = assembly
+        .GetCustomAttributes(typeof(AssemblyCompanyAttribute), false)
+        .OfType<AssemblyCompanyAttribute>()
+        .FirstOrDefault();
+ 
+      Console.WriteLine(description.Description + "\n");
+      Console.WriteLine("Author: " + author.Company + "\n");
+
+      BindingFlags bindingFlags = BindingFlags.Public |
+                      BindingFlags.NonPublic |
+                      BindingFlags.Instance |
+                      BindingFlags.Static;
+
+      Console.WriteLine("Atributes:");
+      Console.WriteLine("----------");
+      foreach (FieldInfo field in typeof(Matrix).GetFields(bindingFlags))
+        Console.WriteLine(field.Attributes + " " + field.FieldType + " " + field.Name);
+
+      Console.WriteLine("\nMethods:");
+      Console.WriteLine("----------");
+      MethodInfo[] methodInfos = typeof(Matrix)
+        .GetMethods(BindingFlags.Public |BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+
+      foreach (MethodInfo methodInfo in methodInfos)
+      {
+        string type = methodInfo.IsPublic ? "Public" : "Private";
+        string method = type + " " + methodInfo.ReturnParameter + methodInfo.Name + "(" + GetParamInfo(methodInfo) + ")";
+        Console.WriteLine(method);
+      }
+    }
+
+    private static string GetParamInfo(MethodInfo methodInfo)
+    {
+      string atributes = "";
+      ParameterInfo[] parametrs = methodInfo.GetParameters();
+      foreach(ParameterInfo parametr in parametrs)
+      {
+        atributes += parametr.ParameterType + " " + parametr.Name + " "; 
+      }
+      return atributes;
     }
   }
 }

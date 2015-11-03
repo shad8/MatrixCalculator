@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Matrix;
+using System.Reflection;
 
 namespace MatrixCalculator
 {
@@ -125,7 +126,7 @@ namespace MatrixCalculator
             break;
           case "3":
             Console.Clear();
-            Console.WriteLine("[3] .Net component\n");
+            Matrix.Matrix.ClassInformation();
             break;
           case "4":
             Console.Clear();
