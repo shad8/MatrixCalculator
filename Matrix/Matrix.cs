@@ -51,6 +51,9 @@ namespace Math
       int row = matrixA.row;
       int column = matrixA.column;
 
+      if (matrixA.row != matrixB.row || matrixA.column != matrixB.column)
+        throw new Exception("Diension of matrix A and B must be equal");
+
       Matrix sumMatrix = new Matrix(row, column);
 
       for (int i = 0; i < row; i++)
@@ -69,6 +72,9 @@ namespace Math
       int row = matrixA.row;
       int column = matrixA.column;
 
+      if (matrixA.row != matrixB.row || matrixA.column != matrixB.column)
+        throw new Exception("Diension of matrix A and B must be equal");
+
       Matrix differenceMatrix = new Matrix(row, column);
 
       for (int i = 0; i < row; i++)
@@ -86,6 +92,9 @@ namespace Math
     {
       int row = matrixA.row;
       int column = matrixB.column;
+
+      if (row != column)
+        throw new Exception("Row of matrix A and column of matrix B must be equal");
 
       Matrix productMatrix = new Matrix(row, column);
 
@@ -169,6 +178,8 @@ namespace Math
       {
         string type = methodInfo.IsPublic ? "Public" : "Private";
         string method = type + " " + methodInfo.ReturnParameter + methodInfo.Name + "(" + GetParamInfo(methodInfo) + ")";
+        if(method.Contains(','))
+          method = method.Substring(0, method.Length-3) + ")";
         Console.WriteLine(method);
       }
     }
@@ -203,7 +214,7 @@ namespace Math
       ParameterInfo[] parametrs = methodInfo.GetParameters();
       foreach(ParameterInfo parametr in parametrs)
       {
-        atributes += parametr.ParameterType + " " + parametr.Name + " "; 
+        atributes += parametr.ParameterType + " " + parametr.Name + ", "; 
       }
       return atributes;
     }

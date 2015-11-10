@@ -182,8 +182,16 @@ namespace MatrixCalculator
       Matrix A = CreateMatrix();
       Console.Clear();
       Matrix B = CreateMatrix();
-      Matrix C = A * B;
-      ShowResult(A, B, C);
+      try
+      {
+        Matrix C = A * B;
+        ShowResult(A, B, C);
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+        Console.WriteLine("Press ENTER to back....");
+      }
     }
 
     private static void SumOfElements()
@@ -199,8 +207,17 @@ namespace MatrixCalculator
       Matrix A = CreateMatrix();
       Console.Clear();
       Matrix B = CreateMatrix();
-      Matrix C = A - B;
-      ShowResult(A, B, C);
+      try
+      {
+        Matrix C = A - B;
+        ShowResult(A, B, C);
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+        Console.WriteLine("Press ENTER to back....");
+      }
+
     }
 
     private static void AdditionMatrix()
@@ -214,7 +231,7 @@ namespace MatrixCalculator
       }
       catch (Exception e)
       {
-        Console.WriteLine("Diension of matrix A and B must be equal");
+        Console.WriteLine(e.Message);
         Console.WriteLine("Press ENTER to back....");
       }
     }
