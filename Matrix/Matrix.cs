@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matrix
+namespace Math
 {
   public class Matrix
   {
@@ -24,7 +24,7 @@ namespace Matrix
       {
         for (int j = 0; j < column; j++)
         {
-          this.IndexOf(i, j, body[index]);
+          IndexOf(i, j, body[index]);
           index++;
         }
       }
@@ -115,11 +115,12 @@ namespace Matrix
 
     public void Print()
     {
-      for (int i = 0; i < this.row; i++)
+      Console.WriteLine("" + row + " " + column + "\n");
+      for (int i = 0; i < row; i++)
       {
-        for (int j = 0; j < this.column; j++)
+        for (int j = 0; j < column; j++)
         {
-          Console.Write(string.Format("{0} ", this.IndexOf(i, j)));
+          Console.Write("\t" + IndexOf(i, j));
         }
         Console.Write(Environment.NewLine + Environment.NewLine);
       }
@@ -168,6 +169,30 @@ namespace Matrix
         string type = methodInfo.IsPublic ? "Public" : "Private";
         string method = type + " " + methodInfo.ReturnParameter + methodInfo.Name + "(" + GetParamInfo(methodInfo) + ")";
         Console.WriteLine(method);
+      }
+    }
+
+    public void SaveToFile(string path)
+    {
+      try
+      {
+        System.IO.StreamWriter file = new System.IO.StreamWriter(path);
+        string dimension = row + " " + column;
+        file.WriteLine(dimension);
+        for (int i = 0; i < row; i++)
+        {
+          for (int j = 0; j < column; j++)
+          {
+            file.Write("\t" + IndexOf(i, j));
+          }
+          file.WriteLine(Environment.NewLine);
+        }
+        file.Close();
+        Console.WriteLine("The operation completed successfully");
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
       }
     }
 
