@@ -17,6 +17,43 @@ namespace MatrixCalculator
       Menu();
     }
 
+    private static void Menu()
+    {
+      string selection;
+      PrintMenu();
+      while (true)
+      {
+        selection = Console.ReadLine();
+
+        switch (selection)
+        {
+          case "1":
+            Console.Clear();
+            MatrixOperations();
+            break;
+          case "2":
+            Console.Clear();
+            ReadWriteOperations();
+            break;
+          case "3":
+            Console.Clear();
+            Math.Matrix.ClassInformation();
+            break;
+          case "4":
+            Console.Clear();
+            Console.WriteLine("Autor:\n Urszula Hołodniak ITS\n");
+            break;
+          case "5":
+            Environment.Exit(0);
+            break;
+          default:
+            Console.Clear();
+            PrintMenu();
+            break;
+        }
+      }
+    }
+
     private static void MatrixOperations()
     {
       Console.Clear();
@@ -119,14 +156,7 @@ namespace MatrixCalculator
       catch (Exception e)
       {
         Console.WriteLine(e.Message);
-        Console.WriteLine("Try again or press 1 tu back:");
-
-        string selection = Console.ReadLine();
-
-        if (selection == "1")
-          MatrixOperations();
-        else
-          ReadMatrixFormFile();
+        ReadMatrixFormFile();
       }
     }
 
@@ -153,8 +183,7 @@ namespace MatrixCalculator
       Console.Clear();
       Matrix B = CreateMatrix();
       Matrix C = A * B;
-      Console.WriteLine(" Result:\n");
-      C.Print();
+      ShowResult(A, B, C);
     }
 
     private static void SumOfElements()
@@ -171,8 +200,7 @@ namespace MatrixCalculator
       Console.Clear();
       Matrix B = CreateMatrix();
       Matrix C = A - B;
-      Console.WriteLine("Result:\n");
-      C.Print();
+      ShowResult(A, B, C);
     }
 
     private static void AdditionMatrix()
@@ -180,63 +208,33 @@ namespace MatrixCalculator
       Matrix A = CreateMatrix();
       Console.Clear();
       Matrix B = CreateMatrix();
-      Matrix C = A + B;
-      Console.WriteLine("Result:\n");
-      C.Print();
+      try {
+        Matrix C = A + B;
+        ShowResult(A, B, C);
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine("Diension of matrix A and B must be equal");
+        Console.WriteLine("Press ENTER to back....");
+      }
     }
 
     private static Matrix CreateMatrix()
     {
-      Console.WriteLine("Define A matrix by row (eg 1,2,3.5,4):");
-      double[] matrixBody = Console.ReadLine().ConvertStringToDoubleArray(',');
-      Console.WriteLine("Number of colum:");
-      int column;
-      int row;
-      Int32.TryParse(Console.ReadLine(), out column);
-      Console.WriteLine("Number of row:");
-      Int32.TryParse(Console.ReadLine(), out row);
-      return new Math.Matrix(matrixBody, row, column);
-    }
-
-    private static void Menu()
-    {
-      string selection;
-      PrintMenu();
-      while(true)
-      {
-        selection = Console.ReadLine();
-
-        switch (selection)
-        {
-          case "1":
-            Console.Clear();
-            MatrixOperations();
-            break;
-          case "2":
-            Console.Clear();
-            ReadWriteOperations();
-            break;
-          case "3":
-            Console.Clear();
-            Math.Matrix.ClassInformation();
-            break;
-          case "4":
-            Console.Clear();
-            Console.WriteLine("Autor:\n Urszula Hołodniak ITS\n");
-            break;
-          case "5":
-            Environment.Exit(0);
-            break;
-          default:
-            Console.Clear();
-            PrintMenu();
-            break;
-        }
-      }
+        Console.WriteLine("Define A matrix by row (eg 1,2,3.5,4):");
+        double[] matrixBody = Console.ReadLine().ConvertStringToDoubleArray(',');
+        Console.WriteLine("Number of colum:");
+        int column;
+        int row;
+        Int32.TryParse(Console.ReadLine(), out column);
+        Console.WriteLine("Number of row:");
+        Int32.TryParse(Console.ReadLine(), out row);
+        return new Math.Matrix(matrixBody, row, column);
     }
 
     private static void PrintMenu()
     {
+      Console.Clear();
       Console.WriteLine("Choose number and press enter to choose options:");
       Console.WriteLine("[1] Matrix operations");
       Console.WriteLine("[2] Read/write operations");
@@ -261,6 +259,23 @@ namespace MatrixCalculator
       Console.WriteLine("[2] Read matrix to file");
       Console.WriteLine("[5] EXIT");
       Console.WriteLine("[ENTER] Back");
+    }
+
+    private static void ShowResult(Matrix A, Matrix B, Matrix C)
+    {
+      Console.WriteLine("Matrix A:\n");
+      A.Print();
+      Console.WriteLine("Matrix B:\n");
+      B.Print();
+      Console.WriteLine("Result:\n");
+      C.Print();
+      Console.WriteLine("Press ENTER to back...");
+      ConsoleKeyInfo key = Console.ReadKey();
+      if (key.Key == ConsoleKey.Enter)
+      {
+        Console.Clear();
+        PrintSubMenu();
+      }
     }
   }
 }
