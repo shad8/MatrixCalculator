@@ -31,21 +31,26 @@ namespace MatrixCalculator
             Console.Clear();
             MatrixOperations();
             break;
+
           case "2":
             Console.Clear();
             ReadWriteOperations();
             break;
+
           case "3":
             Console.Clear();
             Math.Matrix.ClassInformation();
             break;
+
           case "4":
             Console.Clear();
             Console.WriteLine("Autor:\n Urszula Hołodniak ITS\n");
             break;
+
           case "5":
             Environment.Exit(0);
             break;
+
           default:
             Console.Clear();
             PrintMenu();
@@ -71,21 +76,26 @@ namespace MatrixCalculator
             Console.Clear();
             AdditionMatrix();
             break;
+
           case "2":
             Console.Clear();
             SubtractionMatrix();
             break;
+
           case "3":
             Console.Clear();
             MultiplicationMatrix();
             break;
+
           case "4":
             Console.Clear();
             SumOfElements();
             break;
+
           case "5":
             Environment.Exit(0);
             break;
+
           default:
             Console.Clear();
             Menu();
@@ -110,13 +120,16 @@ namespace MatrixCalculator
             Console.Clear();
             WriteMatrixToFile();
             break;
+
           case "2":
             Console.Clear();
             ReadMatrixFormFile();
             break;
+
           case "3":
             Environment.Exit(0);
             break;
+
           default:
             Console.Clear();
             Menu();
@@ -133,6 +146,7 @@ namespace MatrixCalculator
       string path = myDocs + @"\" + fileName + ".txt";
 
       bool first = true;
+
       try
       {
         string[] file = File.ReadAllLines(path);
@@ -238,7 +252,7 @@ namespace MatrixCalculator
 
     private static Matrix CreateMatrix()
     {
-        Console.WriteLine("Define A matrix by row (eg 1,2,3.5,4):");
+        Console.WriteLine("Define A matrix by row (eg 1,2,3,5,4):");
         double[] matrixBody = Console.ReadLine().ConvertStringToDoubleArray(',');
         Console.WriteLine("Number of colum:");
         int column;
@@ -246,7 +260,7 @@ namespace MatrixCalculator
         Int32.TryParse(Console.ReadLine(), out column);
         Console.WriteLine("Number of row:");
         Int32.TryParse(Console.ReadLine(), out row);
-        return new Math.Matrix(matrixBody, row, column);
+        return new Matrix(matrixBody, row, column);
     }
 
     private static void PrintMenu()
@@ -274,7 +288,7 @@ namespace MatrixCalculator
     {
       Console.WriteLine("[1] Write matrix to file");
       Console.WriteLine("[2] Read matrix to file");
-      Console.WriteLine("[5] EXIT");
+      Console.WriteLine("[3] EXIT");
       Console.WriteLine("[ENTER] Back");
     }
 
